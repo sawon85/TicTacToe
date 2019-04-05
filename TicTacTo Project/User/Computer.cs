@@ -12,11 +12,12 @@ namespace Study._02_틱택토__최사원
         char icon;   // 버튼 출력시 출력할 아이콘
         string name; // Computer player의 네임 
         int turn;   // computer의 TURN 저장
-
+        Random random;
         public Computer()
         {
             this.icon = '@'; //아이콘 고정
             turn = 0;
+            random = new Random();
         }
 
         /* Interface 구현 */
@@ -69,17 +70,21 @@ namespace Study._02_틱택토__최사원
                 if (FindPlace(boardArr,sumArr, number/3, number%3, Constants.USER2 * 2))
                     return number;
 
-            //2. 없으면 상대방이 놓으면 이기는 자리 찾기
-            // 단, 대각선은 일부러 보지 않도록 함.  -> 이길 수 없는 게임이 되기 때문.//
-
-            for (int number = 0; number < 9; number++)
-                if (FindPlace(boardArr, sumArr, number / 3, number % 3, Constants.USER1 * 2))
-                    return number;
+            //2. 상대방이 놓으면 이기는 자리 찾기
+            // 20% 확률로 막지 않음.
+            if (random.Next(10) % 5 != 4)
+                for (int number = 0; number < 9; number++)
+                    if (FindPlace(boardArr, sumArr, number / 3, number % 3, Constants.USER1 * 2))
+                        return number;
 
             //3.  한 줄에 컴퓨터만 놓여져 있는 자리 찾기.
-
             for (int number = 0; number < 9; number++)
                 if (FindPlace(boardArr, sumArr, number / 3, number % 3, Constants.USER2))
+                    return number;
+
+            //4. 비어있는 곳 찾기
+            for (int number = 0; number < 9; number++)
+                if (Blank(boardArr, number / 3, number % 3))
                     return number;
 
             return 0;
@@ -108,10 +113,10 @@ namespace Study._02_틱택토__최사원
             {
                 if (row == column) // 1번 5번 9번
                 {
-                    if (sumArr[1, 3] == -2) return true ;
+                    if (sumArr[1, 3] == value) return true ;
                 }
 
-                if (row != column || row == 1)  // 3번 5번 7번
+                if (row != column || row == value)  // 3번 5번 7번
                 {
                     if(sumArr[0, 3] == -2) return true;
                 }

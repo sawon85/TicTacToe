@@ -102,20 +102,19 @@ namespace Study._02_틱택토__최사원
 
             return false;
         }
-        
-        public bool AfterTurnAndCheck(int who, int place,char icon) // 턴이 끝날 때마다 밖에서 호출 될 함수.
+
+        public bool AfterTurnAndCheck(int who, int place, char icon) // 턴이 끝날 때마다 밖에서 호출 될 함수.
         {
-    
+
             int column = place % 3; //각 번호의 행, 열 계산
-            int row = place / 3 ;
+            int row = place / 3;
 
             UpdateBoardArr(who, place, row, column);
             DrawAfterTurn(row, column, icon);
 
-            if (IsGameFinished(row,column,who)) return true; //game이 끝났는 지 확인
+            if (IsGameFinished(row, column, who)) return true; //game이 끝났는 지 확인
 
             return false;
         }
-
     }
 }
