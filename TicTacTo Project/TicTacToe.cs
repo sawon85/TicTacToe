@@ -14,10 +14,10 @@ namespace Study._02_틱택토__최사원
         Board board;
 
         /*WARNING 문구를 저장*/
-        string sameNameWarning = " 첫 번 째 유 저 와 이 름 이 겹 치 지 않 게 해 주 세 요 !    ";
-        string longNameWarning = " 이 름 은 여 덟 글 자 까 지 만 가 능 합 니 다 !                ";
-        string computerNameWarning = " Computer와 같 은 이 름 을 사 용 하 지 마 세 요 !    ";
-        string blankNameWarning = "이 름 을 입 력 하 셔 야 합 니 다 !";
+        string sameNameWarning = " 첫 번 째 유 저 와 이 름 이 겹 치 지 않 게 해 주 세 요 !                     ";
+        string longNameWarning = " 이 름 은 여 덟 글 자 까 지 만 가 능 합 니 다 !                             ";
+        string computerNameWarning = " Computer와 같 은 이 름 을 사 용 하 지 마 세 요 !                       ";
+        string blankNameWarning = "이 름 을 입 력 하 셔 야 합 니 다 ! ( 공 백 닉 네 임 불 가 )                                        ";
 
 
         public TicTacToe(char button)
@@ -78,7 +78,7 @@ namespace Study._02_틱택토__최사원
                 Console.SetCursorPosition(Constants.BUTTON_X_FRAME, Constants.BUTTON_Y_FRAME+2);
                 Console.Write(warning);
                 Console.SetCursorPosition(Constants.BUTTON_X_FRAME + 46, Constants.BUTTON_Y_FRAME);
-                Console.Write("                                                      ");
+                Console.Write("                                                        ");
                 Console.SetCursorPosition(Constants.BUTTON_X_FRAME + 46, Constants.BUTTON_Y_FRAME);
 
             }
