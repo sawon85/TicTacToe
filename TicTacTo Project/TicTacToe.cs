@@ -17,11 +17,13 @@ namespace Study._02_틱택토__최사원
         string sameNameWarning = " 첫 번 째 유 저 와 이 름 이 겹 치 지 않 게 해 주 세 요 !    ";
         string longNameWarning = " 이 름 은 여 덟 글 자 까 지 만 가 능 합 니 다 !                ";
         string computerNameWarning = " Computer와 같 은 이 름 을 사 용 하 지 마 세 요 !    ";
+        string blankNameWarning = "이 름 을 입 력 하 셔 야 합 니 다 !";
 
 
         public TicTacToe(char button)
         {
             board = new Board();
+
 
             switch (button)
             {
@@ -66,8 +68,12 @@ namespace Study._02_틱택토__최사원
                 else if (user1.ReturnName() == "Computer")
                     warning = computerNameWarning; // 컴퓨터와 이름이 같으면 주의 사항
 
+                else if (user1.ReturnName() == "")
+                    warning = blankNameWarning;
+
+
                 else
-                      break; //  주의 사항이 없으면 끝
+                    break; //  주의 사항이 없으면 끝
 
                 Console.SetCursorPosition(Constants.BUTTON_X_FRAME, Constants.BUTTON_Y_FRAME+2);
                 Console.Write(warning);
@@ -95,6 +101,9 @@ namespace Study._02_틱택토__최사원
                 
                 else if (user2.ReturnName() == "Computer" && !user2.IsComputer()) // 이름이 Computer이며 user2가 컴퓨터가 아니면
                     warning = computerNameWarning; // 컴퓨터 이름 주의
+
+                else if (user2.ReturnName() == "")
+                    warning = blankNameWarning;
 
                 else
                     break;
@@ -133,6 +142,9 @@ namespace Study._02_틱택토__최사원
 
         public int PlayTicTacToe()
         {
+
+            Console.SetWindowSize(80, 30);
+
             int selected;
 
             for(int turn =0; turn < 9;turn++)

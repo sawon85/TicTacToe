@@ -24,7 +24,7 @@ namespace Study._02_틱택토__최사원
 
         void IUser.ResetName()
         {
-            this.name = Console.ReadLine();
+            this.name = Console.ReadLine().Trim();
            
         }
 

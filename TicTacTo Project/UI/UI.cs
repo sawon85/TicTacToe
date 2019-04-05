@@ -22,7 +22,9 @@ namespace Study._02_틱택토__최사원
      
         private void WhoWin(string player1, string player2, int whoWin)  // 게임 결과가 나왔을 때 호출될 함수
         {
-          
+
+            Console.SetWindowSize(94, 35);
+
             Console.Clear();
             Console.SetCursorPosition(Constants.WIN_X_FRAME, Constants.WIN_Y_FRAME);
             string text = System.IO.File.ReadAllText(@"text\win.txt", Encoding.Default);  // txt에서 문자를 가져와서 출력
@@ -163,11 +165,12 @@ namespace Study._02_틱택토__최사원
 
         public void Menu()
         {
-            
+
             string number;
 
             while (true)
             {
+                Console.SetWindowSize(100, 30);
                 PrintTitleUI();
                 PrintButtonUI();
                 number = Console.ReadLine();
