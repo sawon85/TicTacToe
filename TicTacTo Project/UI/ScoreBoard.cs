@@ -57,7 +57,7 @@ namespace Study._02_틱택토__최사원
 
             for (int index=0; index<5;index++)
             {
-                Console.SetCursorPosition(Constants.USERSCORE_X_FRAME, Constants.USERSCORE_Y_FRAME+index*2);
+                Console.SetCursorPosition(Constants.USERSCORE_X_FRAME-2, Constants.USERSCORE_Y_FRAME+index*2);
                 Console.Write((index + 1) + "등. ");
 
                 if (index < userScore.Count) 
@@ -111,18 +111,21 @@ namespace Study._02_틱택토__최사원
 
             if (whoWin == Constants.USER2)
                 computerScore.Add("Win");
+
             else if(whoWin == Constants.USER1)
                 computerScore.Add("LOSE");
+
             else
                 computerScore.Add("DRAW");
 
-            if(computerScore.Count>3) // 5번 째 부터 값이 들어오면 첫번 째 값 지우기.
+            if(computerScore.Count>5) // 5번 째 부터 값이 들어오면 첫번 째 값 지우기.
                 computerScore.RemoveAt(0); 
             
         }
 
         private void SortScoreBoard()  // 사용자 배열 높은 포인트 순으로 정렬하기.
         {
+            for(int index=0; index<userScore.Count; index++)
             userScore.Sort(CompareScore);
         }
 
