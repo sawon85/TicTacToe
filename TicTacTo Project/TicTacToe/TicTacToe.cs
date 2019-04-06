@@ -168,9 +168,9 @@ namespace Study._02_틱택토__최사원
 
                     case "N":
                     case "n":
-                        SwapClass();
-                        user1.TurnChange();
-                        user2.TurnChange();
+                        SwapClass();  // 클래스 두개 바꾸기
+                        user1.TurnChange();  // 유저 코드 바꾸기 -> 의미는 없지만 명시적으로 해줌.
+                        user2.TurnChange();  // 유저 코드 바꾸기 -> Computer의 경우 필수적
                         return;
 
                     default:

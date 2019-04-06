@@ -24,6 +24,6 @@ namespace Study._02_틱택토__최사원
 
         void TurnChange(); // user1 <-> user2 change
 
-        int ReturnUserCode();
+        int ReturnUserCode(); //누가 먼저 시작했는 지 반환
     }
 }

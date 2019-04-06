@@ -20,7 +20,7 @@ namespace Study._02_틱택토__최사원
             this.icon = '@'; //아이콘 고정
             turn = 0;
             random = new Random();
-            user = Constants.USER2;
+            user = Constants.USER2; //처음은 유저 2로 저장
 
         }
 
