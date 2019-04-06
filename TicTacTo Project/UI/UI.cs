@@ -20,7 +20,7 @@ namespace Study._02_틱택토__최사원
         }
 
      
-        private void WhoWin(string player1, string player2, int whoWin)  // 게임 결과가 나왔을 때 호출될 함수
+        private void WhoWin(int whoWin, string player1, string player2)  // 게임 결과가 나왔을 때 호출될 함수
         {
 
             Console.SetWindowSize(94, 35);
@@ -203,7 +203,7 @@ namespace Study._02_틱택토__최사원
                 }
 
                GameUI();           //입력이 끝나면  GameUI로 모든 출력 초기화
-               WhoWin(playingGame.ReturnUser1Name(),playingGame.ReturnUser2Name(),playingGame.PlayTicTacToe()); //결과가 나오면 whoWin 실행
+               WhoWin(playingGame.PlayTicTacToe(), playingGame.ReturnUser1Name(),playingGame.ReturnUser2Name()); //결과가 나오면 whoWin 실행
                Outtro();
 
             }

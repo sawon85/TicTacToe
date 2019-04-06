@@ -11,11 +11,15 @@ namespace Study._02_틱택토__최사원
         
         string name;
         char icon;
+        int user;
 
-        public Human(char icon)
+        public Human(char icon, int user)
         {
             this.icon = icon;
+            this.user = user;
         }
+
+        /*---interface 구현---**/
 
         char IUser.ReturnIcon()
         {
@@ -36,14 +40,6 @@ namespace Study._02_틱택토__최사원
         bool IUser.IsComputer()
         {
             return false;
-        }
-
-        private void InputClear()
-        {
-            Console.SetCursorPosition(Constants.INPUT_X_FRAME, Constants.INPUT_Y_FRAME);
-            Console.Write("                           ");
-            Console.SetCursorPosition(Constants.INPUT_X_FRAME, Constants.INPUT_Y_FRAME);
-
         }
 
         int IUser.SelectNumber(int[,] boardArr, int[,]sumArr)
@@ -90,6 +86,24 @@ namespace Study._02_틱택토__최사원
                         break;
                 }
             }
+        }
+
+        void IUser.TurnChange()
+        {
+            user *= -1;
+        }
+
+        int IUser.ReturnUserCode()
+        {
+            return user;
+        }
+
+            /*---human private 함수---*/
+            private void InputClear()
+        {
+            Console.SetCursorPosition(Constants.INPUT_X_FRAME, Constants.INPUT_Y_FRAME);
+            Console.Write("                           ");
+            Console.SetCursorPosition(Constants.INPUT_X_FRAME, Constants.INPUT_Y_FRAME);
 
         }
     }

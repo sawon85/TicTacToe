@@ -13,11 +13,15 @@ namespace Study._02_틱택토__최사원
         string name; // Computer player의 네임 
         int turn;   // computer의 TURN 저장
         Random random;
+        int user;
+
         public Computer()
         {
             this.icon = '@'; //아이콘 고정
             turn = 0;
             random = new Random();
+            user = Constants.USER2;
+
         }
 
         /* Interface 구현 */
@@ -67,19 +71,19 @@ namespace Study._02_틱택토__최사원
             //1. 컴퓨터가 놓으면 이기는 자리 찾기
 
             for (int number = 0; number < 9; number++)
-                if (FindPlace(boardArr,sumArr, number/3, number%3, Constants.USER2 * 2))
+                if (FindPlace(boardArr,sumArr, number/3, number%3, user * 2))
                     return number;
 
             //2. 상대방이 놓으면 이기는 자리 찾기
             // 20% 확률로 막지 않음.
             if (random.Next(10) % 5 != 4)
                 for (int number = 0; number < 9; number++)
-                    if (FindPlace(boardArr, sumArr, number / 3, number % 3, Constants.USER1 * 2))
+                    if (FindPlace(boardArr, sumArr, number / 3, number % 3, user * -2))
                         return number;
 
             //3.  한 줄에 컴퓨터만 놓여져 있는 자리 찾기.
             for (int number = 0; number < 9; number++)
-                if (FindPlace(boardArr, sumArr, number / 3, number % 3, Constants.USER2))
+                if (FindPlace(boardArr, sumArr, number / 3, number % 3, user))
                     return number;
 
             //4. 비어있는 곳 찾기
@@ -89,10 +93,19 @@ namespace Study._02_틱택토__최사원
 
             return 0;
         }
-
-
-        /*computer 함수*/
         
+        void IUser.TurnChange()
+        {
+            user = Constants.USER1;
+        }
+
+        int IUser.ReturnUserCode()
+        {
+            return user;
+        }
+
+        /*computer private 함수*/
+
         int FirstTurn(int[,] boardArr) //첫번째 턴
         {
             if (boardArr[1, 1] == 0)

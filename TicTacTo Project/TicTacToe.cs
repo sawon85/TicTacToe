@@ -28,12 +28,12 @@ namespace Study._02_틱택토__최사원
             switch (button)
             {
                 case '1':  // 1이 입력 들어오면 Human class 두개 할당
-                    user1 = new Human('A');
-                    user2 = new Human('B');
+                    user1 = new Human('A',Constants.USER1);
+                    user2 = new Human('B',Constants.USER2);
                     break;
 
                 case '2': // 2가 입력 들어오면 Human 과 Computer class로 할당
-                    user1 = new Human('A');
+                    user1 = new Human('A',Constants.USER1);
                     user2 = new Computer();
                     break;
             }
@@ -84,7 +84,7 @@ namespace Study._02_틱택토__최사원
             }
 
             Console.SetCursorPosition(Constants.BUTTON_X_FRAME, Constants.BUTTON_Y_FRAME + 2);
-            Console.Write("                                                      ");
+            Console.Write("                                                             ");
             Console.SetCursorPosition(Constants.BUTTON_X_FRAME, Constants.BUTTON_Y_FRAME+4);
             Console.Write(" 두 번 째 유 저 이 름 을 입 력 해 주 세 요 :  ");
 
@@ -140,6 +140,48 @@ namespace Study._02_틱택토__최사원
             Console.WriteLine("                                                         ");
         }
 
+        private void SwapClass()
+        {
+            IUser buffer = user1;
+            user1 = user2;
+            user2 = buffer;
+        }
+
+        private void TurnChange()
+        {
+            Console.SetCursorPosition(Constants.GUIDE_X_FRAME, Constants.GUIDE_Y_FRAME);
+            Console.Write(user1.ReturnName() + "님부터 시작할까요? (Y/N)");
+
+            string yesOrNo;
+
+            while (true)
+            {
+                Console.SetCursorPosition(Constants.GUIDE_X_FRAME2, Constants.GUIDE_Y_FRAME2);
+
+                yesOrNo = Console.ReadLine();
+
+                switch (yesOrNo)
+                {
+                    case "Y":
+                    case "y":
+                        return;
+
+                    case "N":
+                    case "n":
+                        SwapClass();
+                        user1.TurnChange();
+                        user2.TurnChange();
+                        return;
+
+                    default:
+                        Console.SetCursorPosition(Constants.GUIDE_X_FRAME2, Constants.GUIDE_Y_FRAME2);
+                        Console.Write("                                               ");
+                        break;
+                }
+            }
+
+        }
+
         public int PlayTicTacToe()
         {
 
@@ -147,10 +189,12 @@ namespace Study._02_틱택토__최사원
 
             int selected;
 
-            for(int turn =0; turn < 9;turn++)
-            {
+                TurnChange();
+                ResetGuide();
+                board.DrawBoard(); //첫 턴 그리기.
 
-                if (turn == 0) board.DrawBoard(); //첫 턴 그리기.
+            for (int turn =0; turn < 9;turn++)
+            {
 
                 PrintWhoseTurn(user1.ReturnName());
 
@@ -158,7 +202,7 @@ namespace Study._02_틱택토__최사원
                 ReplaceInputCusor(); //번호를 입력할 커서 위치로
                 selected = user1.SelectNumber(board.ReturnBoard(),board.ReturnSumArr()); //숫자 선택
 
-                // 게임이 끝났으면 user1로 코드 반환
+                // 게임이 끝났으면 user1 코드 반환
                 if (board.AfterTurnAndCheck(Constants.USER1, selected, user1.ReturnIcon()))
                     return Constants.USER1;
 
@@ -187,4 +231,6 @@ namespace Study._02_틱택토__최사원
             return Constants.DRAW; //무승부 코드 반환
         }
     }
+
+
 }

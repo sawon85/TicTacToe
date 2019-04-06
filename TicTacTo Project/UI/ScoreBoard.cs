@@ -27,8 +27,60 @@ namespace Study._02_틱택토__최사원
 
         }
 
+        public void PrintScoreBoard()  // ScoreBoard 출력
+        {
+
+            Console.SetCursorPosition(Constants.USERSCORE_X_FRAME - 22, Constants.USERSCORE_Y_FRAME + 4);
+            Console.Write("<  User  >");
+
+            for (int index = 0; index < 5; index++)
+            {
+                Console.SetCursorPosition(Constants.USERSCORE_X_FRAME - 2, Constants.USERSCORE_Y_FRAME + index * 2);
+                Console.Write((index + 1) + "등. ");
+
+                if (index < userScore.Count)
+                    Console.Write(userScore[index].name + "  :  " + userScore[index].point + " 점");
+
+            }
+
+
+            Console.SetCursorPosition(Constants.COMPUBERSCORE_X_FRAME, Constants.COMPUTERSCORE_Y_FRAME - 2);
+            Console.Write("<     Computer 최근 5 게임 전적    >");
+
+            Console.SetCursorPosition(Constants.COMPUBERSCORE_X_FRAME, Constants.COMPUTERSCORE_Y_FRAME);
+
+            if (computerScore.Count == 0)
+            {
+                Console.Write("Computer의 전적이 없습니다.");
+            }
+
+            else
+            {
+                for (int play = 0; play < computerScore.Count; play++)
+                {
+                    if (play > 4) break;
+                    Console.Write((play + 1) + "번 째 : " + computerScore[play] + " / ");
+                }
+            }
+        }
+
+
+        /*---private 함수---*/
+        private void SwapString(ref string name1, ref string name2)
+        {
+            string buffer = name1;
+            name1 = name2;
+            name2 = buffer;
+        }
+
         public void InsertSocre(string user1, string user2, int whoWin) // 점수 저장
         {
+            if (user1 == "Computer") //USER1이 컴퓨터라면
+            {
+                SwapString(ref user1, ref user2); // 두 개의 이름 바꾸고  /**/
+                whoWin *= -1;           //승리 반대로
+
+            }
 
             score score1;
             score1.name = user1;
@@ -38,52 +90,15 @@ namespace Study._02_틱택토__최사원
             if (user2 == "Computer")   // user2가 컴퓨터이면
             {
                 InsertComputerArray(whoWin);  // computerArray에 저장
+                return;
+
             }
 
-            else  //아니면 user2 저장
-            {
                 score score2;
                 score2.name = user2;
                 score2.point = Constants.USER2 * whoWin;
                 InsertUserArray(score2);
-            }
-        }
-
-        public void PrintScoreBoard()  // ScoreBoard 출력
-        {
-
-            Console.SetCursorPosition(Constants.USERSCORE_X_FRAME-22, Constants.USERSCORE_Y_FRAME+4);
-            Console.Write("<  User  >");
-
-            for (int index=0; index<5;index++)
-            {
-                Console.SetCursorPosition(Constants.USERSCORE_X_FRAME-2, Constants.USERSCORE_Y_FRAME+index*2);
-                Console.Write((index + 1) + "등. ");
-
-                if (index < userScore.Count) 
-                 Console.Write(userScore[index].name + "  :  " + userScore[index].point + " 점");
-
-            }
-
-
-            Console.SetCursorPosition(Constants.COMPUBERSCORE_X_FRAME, Constants.COMPUTERSCORE_Y_FRAME-2);
-            Console.Write("<     Computer 전적    >");
-
-            Console.SetCursorPosition(Constants.COMPUBERSCORE_X_FRAME, Constants.COMPUTERSCORE_Y_FRAME);
-
-            if (computerScore.Count == 0)
-            {
-                Console.Write("Computer의 전적이 없습니다.");
-            }
-        
-            else
-            {
-                for (int play = 0; play < computerScore.Count; play++)
-                {
-                    if (play > 4) break;
-                    Console.Write((play + 1) + "번 째 : " + computerScore[play] + " / ");
-                }
-            }
+   
         }
 
         private void InsertUserArray(score score1) // userarray에 struct score 값 저장

@@ -11,6 +11,7 @@ namespace Study._02_틱택토__최사원
 
     interface IUser
     {
+
         char ReturnIcon(); //출력할 아이콘 리턴
 
         void ResetName(); //이름 초기화
@@ -20,5 +21,9 @@ namespace Study._02_틱택토__최사원
         int SelectNumber(int[,] boardArr, int[,]sumArr); //번호 선택
 
         bool IsComputer(); //컴퓨터인지 아닌지 반환
+
+        void TurnChange(); // user1 <-> user2 change
+
+        int ReturnUserCode();
     }
 }
