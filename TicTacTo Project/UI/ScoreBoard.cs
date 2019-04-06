@@ -86,6 +86,8 @@ namespace Study._02_틱택토__최사원
             score1.name = user1;
             score1.point = Constants.USER1 * whoWin; //자신의 코드에 게임 결과 코드를 곱하면 자신의 점수가 된다. 
             InsertUserArray(score1);  //user1 저장
+            SortScoreBoard(); //점수 높은 순으로 정렬
+
 
             if (user2 == "Computer")   // user2가 컴퓨터이면
             {
@@ -98,7 +100,8 @@ namespace Study._02_틱택토__최사원
                 score2.name = user2;
                 score2.point = Constants.USER2 * whoWin;
                 InsertUserArray(score2);
-   
+                SortScoreBoard(); //점수 높은 순으로 정렬
+
         }
 
         private void InsertUserArray(score score1) // userarray에 struct score 값 저장
@@ -117,7 +120,6 @@ namespace Study._02_틱택토__최사원
             }
         
            userScore.Add(score1); //없으면 추가
-            SortScoreBoard();
 
         }
 
